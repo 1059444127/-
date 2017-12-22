@@ -53,7 +53,7 @@
       <Name>LGI.Core.Utils</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\LGI.Core\LGI.Core.csproj">
-      <Project>{58C45F46-AB02-4B31-9EB5-7EA45C538C06}</Project>
+      <Project>{58c45f46-ab02-4b31-9eb5-7ea45c538c06}</Project>
       <Name>LGI.Core</Name>
     </ProjectReference>
   </ItemGroup>
