@@ -40,9 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HL7v2\Field.cs" />
     <Compile Include="HL7v2\HL7v2Reader.cs" />
+    <Compile Include="HL7v2\Segment.cs" />
     <Compile Include="IniFiles.cs" />
     <Compile Include="Logger.cs" />
+    <Compile Include="ObjectHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

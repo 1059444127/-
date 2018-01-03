@@ -28,7 +28,7 @@
         <EntityTypeShape EntityType="LGI.Core.Model.T_DK_CS" Width="1.5" PointX="12.75" PointY="9.75" IsExpanded="false" />
         <EntityTypeShape EntityType="LGI.Core.Model.T_FSDX" Width="1.5" PointX="10.75" PointY="13.75" IsExpanded="false" />
         <EntityTypeShape EntityType="LGI.Core.Model.T_ICD10_BM" Width="1.5" PointX="12.75" PointY="13.75" IsExpanded="false" />
-        <EntityTypeShape EntityType="LGI.Core.Model.T_JCXX" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LGI.Core.Model.T_JCXX" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="false" />
         <EntityTypeShape EntityType="LGI.Core.Model.T_jcxx_fs" Width="1.5" PointX="2.75" PointY="14.75" IsExpanded="false" />
         <EntityTypeShape EntityType="LGI.Core.Model.T_JHP" Width="1.5" PointX="16.75" PointY="0.75" IsExpanded="false" />
         <EntityTypeShape EntityType="LGI.Core.Model.T_JSYZ" Width="1.5" PointX="4.75" PointY="16.75" IsExpanded="false" />
