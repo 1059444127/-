@@ -51,7 +51,7 @@ namespace LGI.Core.Utils.HL7v2
 
         public Segments(string hl7String)
         {
-            var lines = hl7String.Split(new[] { '\r' }, StringSplitOptions.RemoveEmptyEntries);
+            var lines = hl7String.Split(new[] { '\r','\n' }, StringSplitOptions.RemoveEmptyEntries);
             foreach (string line in lines)
             {
                 var segment = new Segment(line);

@@ -15,8 +15,10 @@ namespace LGI.Core.Model
             if (_db == null)
             {
                 IniFiles f =new IniFiles(AppDomain.CurrentDomain.SetupInformation.ApplicationBase+"\\sz.ini");
-                var host = f.ReadString("sqlserver", "host", "localhost");
-                var uid = f.ReadString("sqlserver", "user", "pathnet");
+                var host = f.ReadString("sqlserver", "host", "");
+                if(string.IsNullOrEmpty(host))
+                    host = f.ReadString("sqlserver", "server", "localhost");
+                var uid = f.ReadString("sqlserver", "userId", "pathnet");
                 var pwd = f.ReadString("sqlserver", "password", "4s3c2a1p");
 
                 _db = PathnetEntities.ConnectToSqlServer(host, "pathnet", uid, pwd, false);

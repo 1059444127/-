@@ -1,29 +1,12 @@
 ﻿using System;
 using System.IO;
 
-namespace LGI.Core.Utils
+namespace LGInterface
 {
-    public static class Logger
+    class log
     {
-        private static void WriteMyLog(string message, LogLevel logLevel = LogLevel.一般)
+        public static void WriteMyLog(string message)
         {
-            var logLevelSetting = LogLevel.异常;
-            try
-            {
-                //判断日志级别
-                IniFiles inifile = new IniFiles("sz_log.ini");
-                var strLoglevel = inifile.ReadString("日志", "日志级别", "异常");
-                logLevelSetting = (LogLevel) Enum.Parse(typeof (LogLevel), strLoglevel);
-            }
-            catch (Exception e)
-            {
-            }
-
-            //判断日志级别,如果程序配置的日志级别小于当前日志级别,则不记录
-            if (logLevel > logLevelSetting && logLevel!= LogLevel.异常)
-                return;
-
-
             string LOG_FOLDER = AppDomain.CurrentDomain.BaseDirectory + "Log";
             try
             {
@@ -33,13 +16,12 @@ namespace LGI.Core.Utils
                 {
                     Directory.CreateDirectory(LOG_FOLDER);
                 }
-                if (!File.Exists(filePath)) //如果文件不存在 
+                if (!File.Exists(filePath))//如果文件不存在 
                 {
                     File.Create(filePath).Close();
                 }
                 StreamWriter sw = File.AppendText(filePath);
                 sw.WriteLine("-------------------------------------------------------------------------------------");
-                sw.WriteLine("日志级别:" + logLevel);
                 sw.WriteLine("Date:" + DateTime.Now.ToShortDateString() + " Time:" + DateTime.Now.ToString("HH:mm:ss"));
                 sw.WriteLine(message);
                 //sw.WriteLine(ex.StackTrace);
@@ -47,10 +29,8 @@ namespace LGI.Core.Utils
                 sw.Close();
             }
             catch
-            {
-            }
+            { }
         }
-
         public static string readlog()
         {
             string LOG_FOLDER = AppDomain.CurrentDomain.BaseDirectory + "Log";
@@ -63,7 +43,7 @@ namespace LGI.Core.Utils
                 {
                     Directory.CreateDirectory(LOG_FOLDER);
                 }
-                if (!File.Exists(filePath)) //如果文件不存在 
+                if (!File.Exists(filePath))//如果文件不存在 
                 {
                     File.Create(filePath).Close();
                 }
@@ -74,8 +54,9 @@ namespace LGI.Core.Utils
             {
                 return "";
             }
-        }
 
+
+        }
         public static void clearlog()
         {
             string LOG_FOLDER = AppDomain.CurrentDomain.BaseDirectory + "Log";
@@ -88,38 +69,18 @@ namespace LGI.Core.Utils
                 {
                     Directory.CreateDirectory(LOG_FOLDER);
                 }
-                if (!File.Exists(filePath)) //如果文件不存在 
+                if (!File.Exists(filePath))//如果文件不存在 
                 {
                     File.Create(filePath).Close();
                 }
                 File.WriteAllText(filePath, "");
+
             }
             catch
             {
+
             }
         }
 
-        public static void Debug(string message)
-        {
-            WriteMyLog(message, LogLevel.调试);
-        }
-
-        public static void Info(string message)
-        {
-            WriteMyLog(message, LogLevel.一般);
-        }
-
-        public static void Error(string message)
-        {
-            WriteMyLog(message, LogLevel.异常);
-        }
-
-
-        public enum LogLevel
-        {
-            调试 = 9,
-            一般 = 0,
-            异常 = 5
-        }
     }
 }

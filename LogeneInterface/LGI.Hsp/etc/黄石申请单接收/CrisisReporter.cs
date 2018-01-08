@@ -1,0 +1,68 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using LGI.Core.Model;
+using LGI.Core.Utils;
+using 黄石申请单接收.JhCrisisService;
+
+namespace 黄石危急值回传
+{
+    /// <summary>
+    /// 危急值回传类
+    /// </summary>
+    public static class CrisisReporter
+    {
+        /// <summary>
+        /// 上报危急值
+        /// </summary>
+        /// <param name="blh">病理号</param>
+        public static void ReportCrisis(string blh)
+        {
+            string inXml = "";
+            var dbContext = ContextPool.GetContext();
+            var jcxx = dbContext.T_JCXX.SingleOrDefault(o => o.F_BLH == blh);
+            if(jcxx == null)
+                throw new Exception($"病理号[{blh}]不存在");
+            if(jcxx.F_BGZT != "已审核")
+                throw new Exception($"报告[{blh}]未审核");
+            if(string.IsNullOrEmpty(jcxx.F_BZ))
+                throw new Exception($"报告[{blh}]未填写危急值(T_JCXX.F_BZ)");
+
+            inXml = $@"
+                    <REQUEST>
+                        <CRITICALVALUES_TYPE></CRITICALVALUES_TYPE>
+                        <PARITEMNAME>{jcxx.F_YZXM}</PARITEMNAME>
+                        <REPORT_DATE_TIME>{jcxx.F_SPARE5}</REPORT_DATE_TIME>
+                        <SPECIMEN_NO></SPECIMEN_NO>
+                        <PATIENT_ID>{jcxx.F_BRBH}</PATIENT_ID>
+                        <REMARK>{jcxx.F_BZ}</REMARK>
+                        <CRITICALVALUES_NO>{jcxx.F_BLH}</CRITICALVALUES_NO>
+                    </REQUEST>
+                    ";
+
+            try
+            {
+                CRITICALVALUESBSSoapClient cs = new CRITICALVALUESBSSoapClient();
+                var rtnByte = cs.JHEmrSynchroExeJhCriticalValues(inXml);
+                var rtn = Encoding.Default.GetString(rtnByte);
+                if(rtn.Contains("失败"))
+                    throw new Exception("服务端返回错误:" + rtn);
+            }
+            catch (Exception e)
+            {
+                Logger.Error($"[{blh}]危急值上传失败\r\n" + e);
+                throw new Exception($"[{blh}]危急值上传失败\r\n" + e);
+            }
+        }
+
+        /// <summary>
+        /// 撤销已上报的危急值
+        /// </summary>
+        /// <param name="blh">病理号</param>
+        public static void CancelReportCrisis(string blh)
+        {
+            
+        }
+    }
+}

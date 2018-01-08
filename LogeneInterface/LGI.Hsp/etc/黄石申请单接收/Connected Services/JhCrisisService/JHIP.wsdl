@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:s0="http://tempuri.org" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://tempuri.org" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org">
+      <s:element name="JHEmrSynchroExeJhCriticalValues">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="pInput" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="JHEmrSynchroExeJhCriticalValuesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="JHEmrSynchroExeJhCriticalValuesResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="JHEmrSynchroExeThirdPartyData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="pInput" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="JHEmrSynchroExeThirdPartyDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="JHEmrSynchroExeThirdPartyDataResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="JHEmrSynchroExeJhCriticalValuesSoapIn">
+    <wsdl:part name="parameters" element="s0:JHEmrSynchroExeJhCriticalValues" />
+  </wsdl:message>
+  <wsdl:message name="JHEmrSynchroExeJhCriticalValuesSoapOut">
+    <wsdl:part name="parameters" element="s0:JHEmrSynchroExeJhCriticalValuesResponse" />
+  </wsdl:message>
+  <wsdl:message name="JHEmrSynchroExeThirdPartyDataSoapIn">
+    <wsdl:part name="parameters" element="s0:JHEmrSynchroExeThirdPartyData" />
+  </wsdl:message>
+  <wsdl:message name="JHEmrSynchroExeThirdPartyDataSoapOut">
+    <wsdl:part name="parameters" element="s0:JHEmrSynchroExeThirdPartyDataResponse" />
+  </wsdl:message>
+  <wsdl:portType name="CRITICALVALUESBSSoap">
+    <wsdl:operation name="JHEmrSynchroExeJhCriticalValues">
+      <wsdl:input message="s0:JHEmrSynchroExeJhCriticalValuesSoapIn" />
+      <wsdl:output message="s0:JHEmrSynchroExeJhCriticalValuesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="JHEmrSynchroExeThirdPartyData">
+      <wsdl:input message="s0:JHEmrSynchroExeThirdPartyDataSoapIn" />
+      <wsdl:output message="s0:JHEmrSynchroExeThirdPartyDataSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CRITICALVALUESBSSoap" type="s0:CRITICALVALUESBSSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="JHEmrSynchroExeJhCriticalValues">
+      <soap:operation soapAction="http://tempuri.org/JHIP.CRITICALVALUES.BS.CRITICALVALUESBS.JHEmrSynchroExeJhCriticalValues" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JHEmrSynchroExeThirdPartyData">
+      <soap:operation soapAction="http://tempuri.org/JHIP.CRITICALVALUES.BS.CRITICALVALUESBS.JHEmrSynchroExeThirdPartyData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CRITICALVALUESBS">
+    <wsdl:port name="CRITICALVALUESBSSoap" binding="s0:CRITICALVALUESBSSoap">
+      <soap:address location="http://172.16.80.180:57772/csp/jhip/JHIP.CRITICALVALUES.BS.CRITICALVALUESBS.cls" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

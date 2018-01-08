@@ -1,0 +1,17 @@
+﻿朗珈单点登录For嘉和说明文档
+功能说明:
+1.通过启动exe的入参,获取用户名,并使用指定的用户登录病理系统.
+  平台调用方式例如: D:\PathQc\单点登录.exe dc1jcmQqJZy15oVz5j/KhQ==|LiEzPQ3W9WU0m9Kw (参考嘉和集成平台规范 
+单点登录第三方厂商支持方案 R1-1.0)
+2.若平台用户在病理系统不不存在,系统会自动为用户新建病理用户,默认密码与平台用户名相同,默认权限为最低.
+
+使用说明:
+1.需要安装.netFramework4.0
+2.该程序需要放在病理程序根目录下.
+3.确保sz.ini下有sqlserver配置,如:
+	[sqlserver]
+	Server=LDYXPS15\SQLEXPRESS
+	DataBase=pathnet
+	UserID=pathnet
+	PassWord=4s3c2a1p
+4.默认启动exe为PathNetRpt.exe,如果要启动别的exe,比如切片工作站,将单点登录.exe改名为单点登录_PathNetQp.exe.
