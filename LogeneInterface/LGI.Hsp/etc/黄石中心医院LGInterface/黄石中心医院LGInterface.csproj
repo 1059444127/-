@@ -70,6 +70,11 @@
     <Compile Include="Util\OdbcOracleHelper.cs" />
     <Compile Include="Util\readini.cs" />
     <Compile Include="Util\XmlUtil.cs" />
+    <Compile Include="Web References\BbxxService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <WebReferences Include="Web References\" />
@@ -83,6 +88,11 @@
     </AdditionalFiles>
     <None Include="sz.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Web References\BbxxService\HisBbxxService.wsdl" />
+    <None Include="Web References\BbxxService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -104,7 +114,22 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WebReferenceUrl Include="http://localhost:57792/HisBbxxService.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\BbxxService\</RelPath>
+      <UpdateFromURL>http://localhost:57792/HisBbxxService.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>LGInterface_BbxxService_HisBbxxService</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\BbxxService\HisBbxxService.disco" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

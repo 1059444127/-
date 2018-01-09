@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetBbxx">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sqxh" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBbxxResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBbxxResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetBbxxSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBbxx" />
+  </wsdl:message>
+  <wsdl:message name="GetBbxxSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBbxxResponse" />
+  </wsdl:message>
+  <wsdl:portType name="HisBbxxServiceSoap">
+    <wsdl:operation name="GetBbxx">
+      <wsdl:input message="tns:GetBbxxSoapIn" />
+      <wsdl:output message="tns:GetBbxxSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="HisBbxxServiceSoap" type="tns:HisBbxxServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetBbxx">
+      <soap:operation soapAction="http://tempuri.org/GetBbxx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="HisBbxxServiceSoap12" type="tns:HisBbxxServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetBbxx">
+      <soap12:operation soapAction="http://tempuri.org/GetBbxx" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="HisBbxxService">
+    <wsdl:port name="HisBbxxServiceSoap" binding="tns:HisBbxxServiceSoap">
+      <soap:address location="http://localhost:57792/HisBbxxService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="HisBbxxServiceSoap12" binding="tns:HisBbxxServiceSoap12">
+      <soap12:address location="http://localhost:57792/HisBbxxService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

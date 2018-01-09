@@ -75,6 +75,7 @@
     </None>
     <Content Include="CrisisReportService.asmx" />
     <Content Include="Global.asax" />
+    <Content Include="HisBbxxService.asmx" />
     <Content Include="PisRequestService.asmx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -91,6 +92,10 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="HisBbxxService.asmx.cs">
+      <DependentUpon>HisBbxxService.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="PisRequestService.asmx.cs">
       <DependentUpon>PisRequestService.asmx</DependentUpon>

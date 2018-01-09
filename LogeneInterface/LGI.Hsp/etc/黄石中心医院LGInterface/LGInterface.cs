@@ -4,6 +4,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using dbbase;
+using LGInterface.BbxxService;
 using LGInterface.DAL;
 using LGInterface.Model;
 using LGInterface.Util;
@@ -89,6 +90,7 @@ namespace LGInterface
                 xml = xml + "费别=" + (char)34 + "" + (char)34 + " ";
                 xml = xml + "病人类别=" + (char)34 + sqd.F_BRLB + (char)34 + " ";
                 xml = xml + "/>";
+                xml = xml + GetBbxx(sqd.F_SQXH);
                 xml = xml + "<临床病史><![CDATA[" + "" + "]]></临床病史>";
                 xml = xml + "<临床诊断><![CDATA[" + sqd.F_LCZD + "]]></临床诊断>";
                 xml = xml + "</LOGENE>";
@@ -100,6 +102,21 @@ namespace LGInterface
                 return "0";
             }
             return xml;
+        }
+
+        /// <summary>
+        /// 通过WebService获取来自瑞康视图的标本信息
+        /// </summary>
+        /// <param name="sqxh"></param>
+        /// <returns></returns>
+        private string GetBbxx(string sqxh)
+        {
+            var url = f.ReadString("hszxxy", "bbxxurl", @"172.16.80.174:8081/HisBbxxService.asmx");
+            HisBbxxService hbs = new HisBbxxService();
+            hbs.Url = url;
+            var bbxx = hbs.GetBbxx(sqxh);
+
+            return bbxx;
         }
     }
 }
