@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using LGInterface;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using 黄石申请单接收;
 using System;
 using System.Collections.Generic;

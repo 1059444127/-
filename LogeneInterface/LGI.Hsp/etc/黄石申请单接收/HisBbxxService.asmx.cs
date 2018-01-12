@@ -23,12 +23,14 @@ namespace 黄石申请单接收
         private const string BbxxOdbcConnStr = "BbxxOdbcConnStr";
 
         [WebMethod]
-        public string GetBbxx(string sqxh)
+        public Bbxx GetBbxx(string sqxh)
         {
+            Bbxx bbxx=new Bbxx();
             string connStr = ConfigurationManager.AppSettings[BbxxOdbcConnStr];
 
             string sql = $"select * from v_PATHOLOGICAL_apply v where v.apply_no='{sqxh}'";
             var dtBbxx = OdbcOracleHelper.GetTable(connStr, sql);
+            dtBbxx.DefaultView.Sort = "item_no";
 
             StringBuilder sb = new StringBuilder();
             if (dtBbxx.Rows.Count > 0)
@@ -37,26 +39,37 @@ namespace 黄石申请单接收
                 foreach (DataRow row in dtBbxx.Rows)
                 {
                     sb.Append("<row ");
-                    sb.Append($" F_BBXH = {row["item_no"]} ");
+                    sb.Append($" F_BBXH = '{row["item_no"]}' ");
                     sb.Append($" F_BBTMH = '' ");
-                    sb.Append($" F_BBMC = {row["item_name"]} ");
-                    sb.Append($" F_CQBW = ");
-                    sb.Append($" F_BZ =  ");
-                    sb.Append($" F_LTSJ =  ");
-                    sb.Append($" F_GDSJ =  ");
-                    sb.Append($" F_JSSJ =  ");
-                    sb.Append($" F_JSY =  ");
-                    sb.Append($" F_BBZT =  ");
-                    sb.Append($" F_BBPJ = ");
-                    sb.Append($" F_PJR =  ");
-                    sb.Append($" F_PJSJ = ");
+                    sb.Append($" F_BBMC = '{row["item_name"]}' ");
+                    sb.Append($" F_CQBW = ''");
+                    sb.Append($" F_BZ =  ''");
+                    sb.Append($" F_LTSJ = '' ");
+                    sb.Append($" F_GDSJ =  ''");
+                    sb.Append($" F_JSSJ = '' ");
+                    sb.Append($" F_JSY =  ''");
+                    sb.Append($" F_BBZT = '' ");
+                    sb.Append($" F_BBPJ = ''");
+                    sb.Append($" F_PJR =  ''");
+                    sb.Append($" F_PJSJ = ''");
                     sb.Append("/>");
+
+                    bbxx.Bbmc += row["item_name"]+",";
                 }
                 sb.Append("</BBLB>");
             }
+            bbxx.Bbmc = bbxx.Bbmc.TrimEnd(',');
+            bbxx.Xml=sb.ToString();
 
-            return sb.ToString();
+            return bbxx;
 
         }
+    }
+
+    [Serializable]
+    public class Bbxx
+    {
+        public string Xml { get; set; }
+        public string Bbmc { get; set; } = "";
     }
 }

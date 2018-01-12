@@ -13,7 +13,7 @@
 // 
 #pragma warning disable 1591
 
-namespace LGInterface.BbxxService {
+namespace CrisisSmsSender.SmsService {
     using System;
     using System.Web.Services;
     using System.Diagnostics;
@@ -26,16 +26,16 @@ namespace LGInterface.BbxxService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="HisBbxxServiceSoap", Namespace="http://tempuri.org/")]
-    public partial class HisBbxxService : System.Web.Services.Protocols.SoapHttpClientProtocol {
+    [System.Web.Services.WebServiceBindingAttribute(Name="SMSServiceSoap", Namespace="http://tempuri.org/")]
+    public partial class SMSService : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
-        private System.Threading.SendOrPostCallback GetBbxxOperationCompleted;
+        private System.Threading.SendOrPostCallback SendSMSOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
-        public HisBbxxService() {
-            this.Url = global::LGInterface.Properties.Settings.Default.LGInterface_BbxxService_HisBbxxService;
+        public SMSService() {
+            this.Url = global::CrisisSmsSender.Properties.Settings.Default.CrisisSmsSender_SmsService_SMSService;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
@@ -70,34 +70,40 @@ namespace LGInterface.BbxxService {
         }
         
         /// <remarks/>
-        public event GetBbxxCompletedEventHandler GetBbxxCompleted;
+        public event SendSMSCompletedEventHandler SendSMSCompleted;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetBbxx", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public Bbxx GetBbxx(string sqxh) {
-            object[] results = this.Invoke("GetBbxx", new object[] {
-                        sqxh});
-            return ((Bbxx)(results[0]));
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/SendSMS", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string SendSMS(string msgid, string tel, string msgcontent, string key) {
+            object[] results = this.Invoke("SendSMS", new object[] {
+                        msgid,
+                        tel,
+                        msgcontent,
+                        key});
+            return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void GetBbxxAsync(string sqxh) {
-            this.GetBbxxAsync(sqxh, null);
+        public void SendSMSAsync(string msgid, string tel, string msgcontent, string key) {
+            this.SendSMSAsync(msgid, tel, msgcontent, key, null);
         }
         
         /// <remarks/>
-        public void GetBbxxAsync(string sqxh, object userState) {
-            if ((this.GetBbxxOperationCompleted == null)) {
-                this.GetBbxxOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetBbxxOperationCompleted);
+        public void SendSMSAsync(string msgid, string tel, string msgcontent, string key, object userState) {
+            if ((this.SendSMSOperationCompleted == null)) {
+                this.SendSMSOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSendSMSOperationCompleted);
             }
-            this.InvokeAsync("GetBbxx", new object[] {
-                        sqxh}, this.GetBbxxOperationCompleted, userState);
+            this.InvokeAsync("SendSMS", new object[] {
+                        msgid,
+                        tel,
+                        msgcontent,
+                        key}, this.SendSMSOperationCompleted, userState);
         }
         
-        private void OnGetBbxxOperationCompleted(object arg) {
-            if ((this.GetBbxxCompleted != null)) {
+        private void OnSendSMSOperationCompleted(object arg) {
+            if ((this.SendSMSCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetBbxxCompleted(this, new GetBbxxCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.SendSMSCompleted(this, new SendSMSCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -121,60 +127,27 @@ namespace LGInterface.BbxxService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
-    public partial class Bbxx {
-        
-        private string xmlField;
-        
-        private string bbmcField;
-        
-        /// <remarks/>
-        public string Xml {
-            get {
-                return this.xmlField;
-            }
-            set {
-                this.xmlField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Bbmc {
-            get {
-                return this.bbmcField;
-            }
-            set {
-                this.bbmcField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
-    public delegate void GetBbxxCompletedEventHandler(object sender, GetBbxxCompletedEventArgs e);
+    public delegate void SendSMSCompletedEventHandler(object sender, SendSMSCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetBbxxCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class SendSMSCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal GetBbxxCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal SendSMSCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
         
         /// <remarks/>
-        public Bbxx Result {
+        public string Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((Bbxx)(this.results[0]));
+                return ((string)(this.results[0]));
             }
         }
     }

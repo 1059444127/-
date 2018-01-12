@@ -58,6 +58,8 @@ namespace LGInterface
             string xml = "";
             try
             {
+                var bbxx = GetBbxx(sqd.F_SQXH);
+
                 xml = "<?xml version=" + (char)34 + "1.0" + (char)34 + " encoding=" + (char)34 + "gbk" + (char)34 +
                       "?>";
                 xml = xml + "<LOGENE>";
@@ -82,7 +84,7 @@ namespace LGInterface
                 xml = xml + "送检医生=" + (char)34 + sqd.F_SQYS + (char)34 + " ";
                 xml = xml + "收费=" + (char)34 + sqd.F_SFZH + (char)34 + " ";
 
-                xml = xml + "标本名称=" + (char)34 + sqd.F_BBMC + (char)34 + " ";
+                xml = xml + "标本名称=" + (char)34 + bbxx.Bbmc + (char)34 + " ";
                 xml = xml + "送检医院=" + (char)34 + "" + (char)34 + " ";
                 xml = xml + "医嘱项目=" + (char)34 + sqd.F_YZXM + (char)34 + " ";
                 xml = xml + "备用1=" + (char)34 + "" + (char)34 + " ";
@@ -90,9 +92,9 @@ namespace LGInterface
                 xml = xml + "费别=" + (char)34 + "" + (char)34 + " ";
                 xml = xml + "病人类别=" + (char)34 + sqd.F_BRLB + (char)34 + " ";
                 xml = xml + "/>";
-                xml = xml + GetBbxx(sqd.F_SQXH);
                 xml = xml + "<临床病史><![CDATA[" + "" + "]]></临床病史>";
                 xml = xml + "<临床诊断><![CDATA[" + sqd.F_LCZD + "]]></临床诊断>";
+                xml = xml + bbxx.Xml;
                 xml = xml + "</LOGENE>";
             }
             catch (Exception e)
@@ -109,9 +111,9 @@ namespace LGInterface
         /// </summary>
         /// <param name="sqxh"></param>
         /// <returns></returns>
-        private string GetBbxx(string sqxh)
+        public Bbxx GetBbxx(string sqxh)
         {
-            var url = f.ReadString("hszxxy", "bbxxurl", @"172.16.80.174:8081/HisBbxxService.asmx");
+            var url = f.ReadString("hszxxy", "bbxxurl", @"http://172.16.80.174:8081/HisBbxxService.asmx");
             HisBbxxService hbs = new HisBbxxService();
             hbs.Url = url;
             var bbxx = hbs.GetBbxx(sqxh);

@@ -13,7 +13,7 @@
 // 
 #pragma warning disable 1591
 
-namespace LGInterface.BbxxService {
+namespace WebRrefenceTest.BbxxService {
     using System;
     using System.Web.Services;
     using System.Diagnostics;
@@ -35,7 +35,7 @@ namespace LGInterface.BbxxService {
         
         /// <remarks/>
         public HisBbxxService() {
-            this.Url = global::LGInterface.Properties.Settings.Default.LGInterface_BbxxService_HisBbxxService;
+            this.Url = global::WebRrefenceTest.Properties.Settings.Default.WebRrefenceTest_BbxxService_HisBbxxService;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;

@@ -17,16 +17,16 @@ namespace 黄石申请单接收
     // [System.Web.Script.Services.ScriptService]
     public class CrisisReportService : System.Web.Services.WebService
     {
-
         /// <summary>
         /// 根据病理号回传危急值,报告状态必须为已审核,且t_jcxx.f_bz不能为空
         /// </summary>
         /// <param name="blh">病理号</param>
+        /// <param name="crisis">危急值内容</param>
         /// <returns></returns>
         [WebMethod]
-        public void ReportCrisis(string blh)
+        public void ReportCrisis(string blh,string crisis)
         {
-            CrisisReporter.ReportCrisis(blh);
+            CrisisReporter.ReportCrisis(blh, crisis);
         }
 
 

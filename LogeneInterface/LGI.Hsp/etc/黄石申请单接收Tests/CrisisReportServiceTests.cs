@@ -14,7 +14,7 @@ namespace 黄石申请单接收.Tests
         public void ReportCrisisTest()
         {
             CrisisReportService service= new CrisisReportService();
-            service.ReportCrisis("1708226600");
+            service.ReportCrisis("1708226600","测试危急值");
         }
     }
 }

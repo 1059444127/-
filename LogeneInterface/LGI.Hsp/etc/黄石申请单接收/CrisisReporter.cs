@@ -19,15 +19,16 @@ namespace 黄石危急值回传
         /// <param name="blh">病理号</param>
         public static void ReportCrisis(string blh)
         {
+
+        }
+
+        public static void ReportCrisis(string blh,string crisis)
+        {
             string inXml = "";
             var dbContext = ContextPool.GetContext();
             var jcxx = dbContext.T_JCXX.SingleOrDefault(o => o.F_BLH == blh);
-            if(jcxx == null)
+            if (jcxx == null)
                 throw new Exception($"病理号[{blh}]不存在");
-            if(jcxx.F_BGZT != "已审核")
-                throw new Exception($"报告[{blh}]未审核");
-            if(string.IsNullOrEmpty(jcxx.F_BZ))
-                throw new Exception($"报告[{blh}]未填写危急值(T_JCXX.F_BZ)");
 
             inXml = $@"
                     <REQUEST>
@@ -36,7 +37,7 @@ namespace 黄石危急值回传
                         <REPORT_DATE_TIME>{jcxx.F_SPARE5}</REPORT_DATE_TIME>
                         <SPECIMEN_NO></SPECIMEN_NO>
                         <PATIENT_ID>{jcxx.F_BRBH}</PATIENT_ID>
-                        <REMARK>{jcxx.F_BZ}</REMARK>
+                        <REMARK>{crisis}</REMARK>
                         <CRITICALVALUES_NO>{jcxx.F_BLH}</CRITICALVALUES_NO>
                     </REQUEST>
                     ";
@@ -46,7 +47,7 @@ namespace 黄石危急值回传
                 CRITICALVALUESBSSoapClient cs = new CRITICALVALUESBSSoapClient();
                 var rtnByte = cs.JHEmrSynchroExeJhCriticalValues(inXml);
                 var rtn = Encoding.Default.GetString(rtnByte);
-                if(rtn.Contains("失败"))
+                if (rtn.Contains("失败"))
                     throw new Exception("服务端返回错误:" + rtn);
             }
             catch (Exception e)
